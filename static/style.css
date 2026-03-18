@@ -1,0 +1,356 @@
+/* --------------------------------------------------------------------------
+   Variables globales
+   -------------------------------------------------------------------------- */
+:root {
+  --fondo:           #0d0014;
+  --fondo-panel:     #130020;
+  --fondo-input:     #1a0030;
+  --morado:          #7c3aed;
+  --morado-claro:    #a855f7;
+  --morado-borde:    #4c1d95;
+  --cyan:            #06b6d4;
+  --texto:           #e9d5ff;
+  --texto-opaco:     #6b21a8;
+  --borde:           #2e1065;
+}
+
+/* --------------------------------------------------------------------------
+   Reset y base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--fondo);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--texto);
+  font-size: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   Layout principal
+   -------------------------------------------------------------------------- */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   Encabezado
+   -------------------------------------------------------------------------- */
+header {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--borde);
+  background: var(--fondo-panel);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--morado-claro);
+  letter-spacing: 1px;
+}
+
+/* Indicador de conexion */
+.barra-estado {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--texto-opaco);
+}
+
+.punto-estado {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+/* Elementos que no se usan en este diseño */
+.header-glow,
+.linea-scan,
+.crt-overlay,
+.scanlines,
+.esquina {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Area principal
+   -------------------------------------------------------------------------- */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 12px 16px 0;
+  gap: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   Caja de mensajes
+   -------------------------------------------------------------------------- */
+.contenedor-chat {
+  flex: 1;
+  overflow: hidden;
+}
+
+.pantalla-chat {
+  height: 100%;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--fondo-panel);
+}
+
+#caja-mensajes {
+  list-style: none;
+  height: 100%;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--morado-borde) transparent;
+}
+
+#caja-mensajes::-webkit-scrollbar       { width: 5px; }
+#caja-mensajes::-webkit-scrollbar-track { background: transparent; }
+#caja-mensajes::-webkit-scrollbar-thumb { background: var(--morado-borde); border-radius: 4px; }
+
+/* --------------------------------------------------------------------------
+   Mensajes
+   -------------------------------------------------------------------------- */
+#caja-mensajes li {
+  max-width: 75%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #1e0035;
+  border: 1px solid var(--borde);
+  line-height: 1.5;
+  word-break: break-word;
+  font-size: 0.9rem;
+}
+
+/* Nombre del autor */
+#caja-mensajes li strong {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--morado-claro);
+  margin-bottom: 3px;
+}
+
+/* Mensajes propios */
+#caja-mensajes li.propio {
+  align-self: flex-end;
+  background: #2d0060;
+  border-color: var(--morado);
+  text-align: right;
+}
+
+#caja-mensajes li.propio strong {
+  color: var(--cyan);
+}
+
+/* --------------------------------------------------------------------------
+   Preview de imagenes
+   -------------------------------------------------------------------------- */
+.imagen-chat {
+  display: block;
+  max-width: 220px;
+  max-height: 160px;
+  border-radius: 6px;
+  border: 1px solid var(--morado-borde);
+  margin-top: 6px;
+  object-fit: cover;
+}
+
+#caja-mensajes li.propio .imagen-chat {
+  margin-left: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Preview de links
+   -------------------------------------------------------------------------- */
+.preview-link {
+  display: block;
+  margin-top: 8px;
+  border: 1px solid var(--morado-borde);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0d0014;
+  max-width: 260px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.preview-link:hover {
+  border-color: var(--morado);
+}
+
+.preview-imagen {
+  width: 100%;
+  max-height: 110px;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-cuerpo {
+  padding: 8px;
+}
+
+.preview-titulo {
+  font-size: 0.8rem;
+  color: var(--morado-claro);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.preview-descripcion {
+  font-size: 0.72rem;
+  color: var(--texto-opaco);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.preview-url {
+  font-size: 0.68rem;
+  color: var(--cyan);
+  margin-top: 4px;
+  opacity: 0.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#caja-mensajes li.propio .preview-link {
+  margin-left: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Area de input (siempre al fondo)
+   -------------------------------------------------------------------------- */
+.area-input {
+  flex-shrink: 0;
+  padding: 10px 0 14px;
+  border-top: 1px solid var(--borde);
+}
+
+/* Etiqueta y contador */
+.decoracion-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.72rem;
+  color: var(--texto-opaco);
+}
+
+.etiqueta-input {
+  font-weight: 500;
+}
+
+/* Contador de caracteres */
+.contador {
+  font-size: 0.72rem;
+  transition: color 0.2s;
+}
+
+.contador.advertencia { color: #f59e0b; }
+.contador.limite      { color: #f43f5e; }
+
+/* Fila input + boton */
+.fila-input {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+/* Contenedor del textarea */
+.contenedor-textarea {
+  flex: 1;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--fondo-input);
+  transition: border-color 0.15s;
+}
+
+.contenedor-textarea:focus-within {
+  border-color: var(--morado);
+}
+
+/* Campo de texto */
+#campo-mensaje {
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: none;
+  min-height: 42px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+#campo-mensaje::placeholder {
+  color: var(--texto-opaco);
+}
+
+/* Boton enviar */
+#boton-enviar {
+  flex-shrink: 0;
+  padding: 10px 18px;
+  background: var(--morado);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+#boton-enviar:hover  { background: var(--morado-claro); }
+#boton-enviar:active { background: var(--morado); }
+
+.flecha-boton { font-size: 0.75rem; }
+
+/* Pista de teclado */
+.pista-input {
+  margin-top: 5px;
+  font-size: 0.65rem;
+  color: var(--texto-opaco);
+  opacity: 0.5;
+}
+
+kbd {
+  background: var(--fondo-input);
+  border: 1px solid var(--borde);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: inherit;
+}

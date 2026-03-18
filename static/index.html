@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RetroChat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="app">
+
+    <header>
+      <div class="header-glow"></div>
+      <div class="contenedor-header">
+
+        <div class="logo">
+          <span class="logo-bracket">[</span>
+          RETRO<span class="logo-acento">CHAT</span>
+          <span class="logo-bracket">]</span>
+        </div>
+
+        <div class="barra-estado">
+          <span class="punto-estado"></span>
+          <span class="texto-estado">CONECTADO</span>
+        </div>
+
+      </div>
+      <div class="linea-scan"></div>
+    </header>
+
+    <main>
+
+      <!------ Caja donde aparecen los mensajes ------>
+      <div class="contenedor-chat">
+        <div class="pantalla-chat">
+          <div class="esquina tl"></div>
+          <div class="esquina tr"></div>
+          <div class="esquina bl"></div>
+          <div class="esquina br"></div>
+          <ul id="caja-mensajes"></ul>
+        </div>
+      </div>
+
+      <!------ Area de escritura - siempre visible al fondo ------>
+      <div class="area-input">
+
+        <div class="decoracion-input">
+          <span class="etiqueta-input">MSG_INPUT</span>
+          <span id="contador-caracteres" class="contador">0 / 140</span>
+        </div>
+
+        <div class="fila-input">
+          <div class="contenedor-textarea">
+            <textarea
+              id="campo-mensaje"
+              placeholder="ESCRIBE TU MENSAJE..."
+              maxlength="140"
+              rows="1"
+            ></textarea>
+          </div>
+          <button id="boton-enviar">
+            <span class="texto-boton">ENVIAR</span>
+            <span class="flecha-boton">▶</span>
+          </button>
+        </div>
+
+        <div class="pista-input">PRESIONA <kbd>ENTER</kbd> PARA ENVIAR</div>
+
+      </div>
+
+    </main>
+
+
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
